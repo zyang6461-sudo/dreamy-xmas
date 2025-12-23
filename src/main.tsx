@@ -1,16 +1,19 @@
 import ReactDOM from "react-dom/client";
-import { Suspense, StrictMode } from 'react';
+import { Suspense } from "react";
 import App from "./App";
 import "./index.css";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ErrorBoundary>
-      <Suspense fallback={<div style={{ color: "white", padding: 12 }}>Loadingâ€?/div>}>
-        <App />
-      </Suspense>
-    </ErrorBoundary>
-  </StrictMode>
+  <ErrorBoundary>
+    <Suspense
+      fallback={
+        <div style={{ color: "#fff", padding: 12, fontFamily: "system-ui" }}>
+          Loadingâ€¦
+        </div>
+      }
+    >
+      <App />
+    </Suspense>
+  </ErrorBoundary>
 );
-

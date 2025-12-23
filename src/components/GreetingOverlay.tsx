@@ -1,70 +1,54 @@
-export function GreetingOverlay() {
+import { useEffect, useState } from "react";
+
+type Props = {
+  title?: string;
+  subtitle?: string;
+  durationMs?: number;
+  onDone?: () => void;
+};
+
+export function GreetingOverlay({
+  title = "Merry Christmas to syy✨",
+  subtitle = "Wishing you a dreamy night  from yzy",
+  durationMs = 2200,
+  onDone,
+}: Props) {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      setShow(false);
+      onDone?.();
+    }, durationMs);
+    return () => window.clearTimeout(t);
+  }, [durationMs, onDone]);
+
+  if (!show) return null;
+
   return (
     <div
       style={{
-        position: 'fixed',
+        position: "fixed",
         inset: 0,
-        pointerEvents: 'none',
-        zIndex: 20, // �?Canvas �?
+        display: "grid",
+        placeItems: "center",
+        pointerEvents: "none",
+        zIndex: 1000,
+        color: "white",
+        fontFamily: "system-ui",
+        background:
+          "radial-gradient(ellipse at center, rgba(255,255,255,0.06), rgba(0,0,0,0.55))",
+        backdropFilter: "blur(6px)",
       }}
     >
-      <div
-        style={{
-          position: 'absolute',
-          right: 92,
-          top: '44%',
-          transform: 'translateY(-50%)',
-          textAlign: 'left',
-        }}
-      >
-        {/* Merry Christmas（可删，如果你只要中文） */}
-        <div
-          style={{
-            display: 'inline-block',
-            padding: '10px 16px',
-            borderRadius: 14,
-            background: 'rgba(255,255,255,0.12)',
-            backdropFilter: 'blur(6px)',
-            WebkitBackdropFilter: 'blur(6px)',
-            marginBottom: 10,
-          }}
-        >
-          <div
-            style={{
-              fontSize: 34,
-              lineHeight: 1,
-              fontFamily:
-                '"Brush Script MT","Segoe Script","Snell Roundhand","Pacifico",cursive',
-              color: '#e9ffff',
-              textShadow:
-                '0 0 10px rgba(125,249,255,0.55), 0 0 22px rgba(255,122,217,0.30)',
-              letterSpacing: 0.3,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Merry Christmas
-          </div>
+      <div style={{ textAlign: "center", padding: 24 }}>
+        <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: 1 }}>
+          {title}
         </div>
-
-        {/* �?你要的中文文�?*/}
-        <div
-          style={{
-            color: '#ffffff',
-            fontSize: 22,
-            lineHeight: 1.55,
-            fontWeight: 650,
-            letterSpacing: 0.8,
-            textShadow: '0 0 10px rgba(255,255,255,0.20)',
-            userSelect: 'none',
-          }}
-        >
-             <div>to syy:</div>
-          <div>圣诞是冬的来�?/div>
-          <div>而你是我的惊�?/div>
-          <div>from yzy</div>
+        <div style={{ marginTop: 10, fontSize: 16, opacity: 0.85 }}>
+          {subtitle}
         </div>
       </div>
     </div>
   );
 }
-
