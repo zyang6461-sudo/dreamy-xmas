@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Line } from '@react-three/drei';
@@ -55,7 +55,7 @@ function FloorDust({ count }: { count: number }) {
       toneMapped: false,
       uniforms: {
         uTime: { value: 0 },
-        uSize: { value: 18.0 },     // 基础点大小
+        uSize: { value: 18.0 },     // 基础点大�?
         uFadeNear: { value: 12.0 },
         uFadeFar: { value: 210.0 },
         uCold: { value: new THREE.Color('#9fe7ff') },
@@ -83,14 +83,14 @@ function FloorDust({ count }: { count: number }) {
           // 深度衰减
           float fade = 1.0 - smoothstep(uFadeNear, uFadeFar, depth);
 
-          // 很轻的闪烁
+          // 很轻的闪�?
           float tw = 0.85 + 0.15 * sin(uTime * 1.2 + aSeed * 19.0);
           vAlpha = fade * tw;
 
           // 少量偏粉（避免“粉布”）
           vMix = step(0.88, aSeed); // ~12%
 
-          // 点大小：透视 + clamp（防止异常过大导致 overdraw）
+          // 点大小：透视 + clamp（防止异常过大导�?overdraw�?
           float ps = uSize * (1.0 / max(depth, 1.0));
           gl_PointSize = clamp(ps, 0.65, 2.2);
 
@@ -107,7 +107,7 @@ function FloorDust({ count }: { count: number }) {
           vec2 uv = gl_PointCoord - vec2(0.5);
           float d = length(uv);
 
-          // ✅ 直接丢弃外圈像素，减少填充率（非常关键）
+          // �?直接丢弃外圈像素，减少填充率（非常关键）
           if (d > 0.55) discard;
 
           float a = smoothstep(0.55, 0.0, d);
@@ -117,7 +117,7 @@ function FloorDust({ count }: { count: number }) {
 
           float outA = a * vAlpha;
 
-          // 再丢弃极低 alpha（减少 blending 压力）
+          // 再丢弃极�?alpha（减�?blending 压力�?
           if (outA < 0.01) discard;
 
           gl_FragColor = vec4(col, outA);
@@ -133,7 +133,7 @@ function FloorDust({ count }: { count: number }) {
     matRef.current.uniforms.uTime.value += delta;
   });
 
-  // ✅ 关键：释放 GPU 资源（不然 HMR/重建会越堆越大，最后 Context Lost）
+  // �?关键：释�?GPU 资源（不�?HMR/重建会越堆越大，最�?Context Lost�?
   useEffect(() => {
     return () => {
       geom.dispose();
@@ -188,3 +188,4 @@ function FloorOrbits() {
     </group>
   );
 }
+

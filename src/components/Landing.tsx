@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useStore } from '../store';
 
@@ -31,9 +30,9 @@ export function Landing() {
           </h1>
 
           <p className="mt-5 text-pink-100/70 leading-relaxed max-w-[58ch]">
-            粉色梦幻 × 科技氛围。点击进入后：
-            <span className="text-white/80">点击屏幕</span>聚合/炸开；
-            <span className="text-white/80">手势模式</span>可用手掌旋转、捏合聚拢。
+            粉色梦幻 × 科技氛围。点击进入后�?
+            <span className="text-white/80">点击屏幕</span>聚合/炸开�?
+            <span className="text-white/80">手势模式</span>可用手掌旋转、捏合聚拢�?
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -60,10 +59,11 @@ export function Landing() {
           </div>
 
           <div className="mt-6 text-xs text-white/40 tracking-[0.2em]">
-            TIP: 如果音乐没响，点右上角 🔊 再试一次（浏览器需要用户交互）
+            TIP: 如果音乐没响，点右上�?🔊 再试一次（浏览器需要用户交互）
           </div>
         </div>
       </motion.div>
     </div>
   );
 }
+

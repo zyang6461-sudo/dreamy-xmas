@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function GreetingOverlay() {
   return (
     <div
@@ -7,7 +5,7 @@ export function GreetingOverlay() {
         position: 'fixed',
         inset: 0,
         pointerEvents: 'none',
-        zIndex: 20, // 比 Canvas 高
+        zIndex: 20, // �?Canvas �?
       }}
     >
       <div
@@ -48,7 +46,7 @@ export function GreetingOverlay() {
           </div>
         </div>
 
-        {/* ✅ 你要的中文文案 */}
+        {/* �?你要的中文文�?*/}
         <div
           style={{
             color: '#ffffff',
@@ -61,11 +59,12 @@ export function GreetingOverlay() {
           }}
         >
              <div>to syy:</div>
-          <div>圣诞是冬的来信</div>
-          <div>而你是我的惊喜</div>
+          <div>圣诞是冬的来�?/div>
+          <div>而你是我的惊�?/div>
           <div>from yzy</div>
         </div>
       </div>
     </div>
   );
 }
+

@@ -78,7 +78,7 @@ function Scene({
       <Sparkles count={90} scale={[60, 35, 60]} size={1.0} speed={0.10} opacity={0.18} color="#fff" />
       <Sparkles count={60} scale={[60, 35, 60]} size={0.85} speed={0.07} opacity={0.10} color="#7df9ff" />
 
-      {/* ✅ 新增：粉色空气微粒（两层叠加） */}
+      {/* �?新增：粉色空气微粒（两层叠加�?*/}
       <Sparkles
         count={110}
         scale={[70, 45, 70]}
@@ -242,3 +242,4 @@ export default function Experience({
     </Canvas>
   );
 }
+

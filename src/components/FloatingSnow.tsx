@@ -9,8 +9,8 @@ type Props = {
   yBase?: number;       // 基准高度
   fallSpeed?: number;   // 下落速度
   drift?: number;       // 横向飘动
-  sizeMin?: number;     // 最小雪花尺寸（世界单位）
-  sizeMax?: number;     // 最大雪花尺寸（世界单位）
+  sizeMin?: number;     // 最小雪花尺寸（世界单位�?
+  sizeMax?: number;     // 最大雪花尺寸（世界单位�?
   opacity?: number;
 };
 
@@ -51,7 +51,7 @@ function makeSnowflakeTexture(size = 128) {
     ctx.lineTo(R * 0.92, 0);
     ctx.stroke();
 
-    // 分叉（只画线，不画面）
+    // 分叉（只画线，不画面�?
     const branch = (t: number, len: number, ang: number) => {
       const x = R * t;
       ctx.globalAlpha = 0.90;
@@ -70,7 +70,7 @@ function makeSnowflakeTexture(size = 128) {
     branch(0.80, R * 0.12, -0.98);
   };
 
-  // 6 臂
+  // 6 �?
   for (let k = 0; k < 6; k++) {
     ctx.save();
     ctx.rotate((Math.PI * 2 * k) / 6);
@@ -106,8 +106,8 @@ export function FloatingSnow({
   yBase = -2,
   fallSpeed = 0.7,
   drift = 0.7,
-  sizeMin = 0.35,   // ✅ 大一点（你想更大就改 0.45）
-  sizeMax = 0.95,   // ✅ 最大雪花大小
+  sizeMin = 0.35,   // �?大一点（你想更大就改 0.45�?
+  sizeMax = 0.95,   // �?最大雪花大�?
   opacity = 0.72,
 }: Props) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
@@ -134,7 +134,7 @@ export function FloatingSnow({
       rot[i] = Math.random() * Math.PI * 2;
       rotSpeed[i] = (Math.random() * 2 - 1) * 0.8;
 
-      // 大小分布：大雪花更少（偏小为主，少量大的）
+      // 大小分布：大雪花更少（偏小为主，少量大的�?
       const t = Math.pow(Math.random(), 1.8);
       scale[i] = THREE.MathUtils.lerp(sizeMax, sizeMin, t);
     }
@@ -156,7 +156,7 @@ export function FloatingSnow({
       // 下落
       data.pos[i3 + 1] -= data.speed[i] * delta;
 
-      // 横向飘（更像 reference 那种慢飘）
+      // 横向飘（更像 reference 那种慢飘�?
       data.pos[i3] += Math.sin(t * 0.6 + data.phase[i]) * drift * delta * 0.65;
       data.pos[i3 + 2] += Math.cos(t * 0.5 + data.phase[i]) * drift * delta * 0.35;
 
@@ -182,18 +182,18 @@ export function FloatingSnow({
     m.instanceMatrix.needsUpdate = true;
   });
 
-  // ✅ 释放贴图，避免热更新堆资源
+  // �?释放贴图，避免热更新堆资�?
   const disposeTimer = useRef<number | null>(null);
 
 useEffect(() => {
-  // 如果 StrictMode 触发“cleanup 后立刻又 setup”，这里会把刚刚排队的 dispose 取消掉
+  // 如果 StrictMode 触发“cleanup 后立刻又 setup”，这里会把刚刚排队�?dispose 取消�?
   if (disposeTimer.current !== null) {
     window.clearTimeout(disposeTimer.current);
     disposeTimer.current = null;
   }
 
   return () => {
-    // 真正卸载时才会走到这里且不会再有下一次 setup 来取消
+    // 真正卸载时才会走到这里且不会再有下一�?setup 来取�?
     disposeTimer.current = window.setTimeout(() => {
       tex.dispose();
       disposeTimer.current = null;
@@ -211,11 +211,12 @@ useEffect(() => {
         opacity={opacity}
         depthWrite={false}
         toneMapped={false}
-        // 更像真实雪：用 NormalBlending（别用 Additive 过亮）
+        // 更像真实雪：�?NormalBlending（别�?Additive 过亮�?
         blending={THREE.NormalBlending}
-        // 丢掉低alpha像素，减少过度绘制（更稳也更清爽）
+        // 丢掉低alpha像素，减少过度绘制（更稳也更清爽�?
         alphaTest={0.05}
       />
     </instancedMesh>
   );
 }
+

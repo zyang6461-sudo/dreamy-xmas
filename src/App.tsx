@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo, useRef } from 'react';
+import { Suspense, useEffect, useMemo, useRef } from 'react';
 import Experience from './components/Experience';
 import { Overlay } from './components/Overlay';
 import { Landing } from './components/Landing';
@@ -26,7 +26,7 @@ export default function App() {
     if (!entered) return;
     if (audioPlaying) {
       bgMusic.play().catch(() => {
-        // 浏览器策略：需要用户手势
+        // 浏览器策略：需要用户手�?
       });
     } else {
       bgMusic.pause();
@@ -38,10 +38,10 @@ export default function App() {
       className="w-full h-screen relative overflow-hidden bg-[#050103]"
       onClick={(e) => {
         const target = e.target as HTMLElement | null;
-        // 点击按钮不触发切换
+        // 点击按钮不触发切�?
         if (target?.closest('button')) return;
 
-        // 未进入：点背景也算进入
+        // 未进入：点背景也算进�?
         if (!entered) {
           enter();
           return;
@@ -60,8 +60,9 @@ export default function App() {
       <Overlay />
       <GestureController gestureRotationRef={gestureRotationRef} />
 
-      {/* ✅ 新增：右侧文案叠层（永远在 Canvas 上面，不受 fog/bloom 影响） */}
+      {/* �?新增：右侧文案叠层（永远�?Canvas 上面，不�?fog/bloom 影响�?*/}
       <GreetingOverlay />
     </div>
   );
 }
+

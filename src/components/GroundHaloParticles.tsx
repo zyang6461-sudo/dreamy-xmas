@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -9,7 +9,7 @@ type Props = {
   y?: number;
   thickness?: number;
   spin?: number;
-  densityPower?: number; // 越接近 1 越“铺开”
+  densityPower?: number; // 越接�?1 越“铺开�?
   size?: number;
   opacity?: number;
 };
@@ -21,7 +21,7 @@ function makeSoftDotTexture() {
   const ctx = c.getContext('2d')!;
   const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
 
-  // 中心亮、边缘透明：像“粉尘粒子”
+  // 中心亮、边缘透明：像“粉尘粒子�?
   g.addColorStop(0.0, 'rgba(255,255,255,1.0)');
   g.addColorStop(0.25, 'rgba(255,255,255,0.8)');
   g.addColorStop(0.6, 'rgba(255,255,255,0.22)');
@@ -56,7 +56,7 @@ export function GroundHaloParticles({
     const pos = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-      // u 越接近 0 越靠中心。densityPower 越接近 1 越“铺满全场”
+      // u 越接�?0 越靠中心。densityPower 越接�?1 越“铺满全场�?
       const u = Math.random() ** densityPower;
       const r = innerRadius + (outerRadius - innerRadius) * u;
 
@@ -102,3 +102,4 @@ export function GroundHaloParticles({
     </group>
   );
 }
+

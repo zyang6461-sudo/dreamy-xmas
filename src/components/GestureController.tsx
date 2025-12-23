@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FilesetResolver, HandLandmarker } from '@mediapipe/tasks-vision';
 import * as THREE from 'three';
 import { useStore } from '../store';
@@ -205,3 +205,4 @@ export function GestureController({
     </>
   );
 }
+

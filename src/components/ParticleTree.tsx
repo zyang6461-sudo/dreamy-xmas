@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useStore } from '../store';
 
 const COUNT = 7500;
 
-const bottomC = new THREE.Color('#6b1bff'); // 紫
-const midC = new THREE.Color('#ff4fd8');    // 霓虹粉
-const topC = new THREE.Color('#ffffff');    // 白
-const iceC = new THREE.Color('#e9ffff');    // 冰青白
-const lavC = new THREE.Color('#efe6ff');    // 冰紫白
+const bottomC = new THREE.Color('#6b1bff'); // �?
+const midC = new THREE.Color('#ff4fd8');    // 霓虹�?
+const topC = new THREE.Color('#ffffff');    // �?
+const iceC = new THREE.Color('#e9ffff');    // 冰青�?
+const lavC = new THREE.Color('#efe6ff');    // 冰紫�?
 
 function boostColor(c: THREE.Color, t01: number) {
   const hsl = { h: 0, s: 0, l: 0 };
@@ -47,7 +47,7 @@ export const ParticleTree = ({
       const y = Math.random() * 20 - 10;
       if (y > maxY) maxY = y;
 
-      // 让树更“锥形”
+      // 让树更“锥形�?
       const t = THREE.MathUtils.clamp((y + 10) / 20, 0, 1); // 0..1
       const baseR = THREE.MathUtils.lerp(9.0, 0.6, t);      // 底大顶小
       const jitter = Math.random() * 1.2;
@@ -71,7 +71,7 @@ export const ParticleTree = ({
       explodePositions[i3 + 1] = rExplode * Math.sin(theta) * Math.sin(phi);
       explodePositions[i3 + 2] = rExplode * Math.cos(phi);
 
-      // 颜色：紫 -> 粉 -> 白，并增强饱和/亮度
+      // 颜色：紫 -> �?-> 白，并增强饱�?亮度
       const base = new THREE.Color();
       if (t < 0.62) base.lerpColors(bottomC, midC, t / 0.62);
       else base.lerpColors(midC, topC, (t - 0.62) / 0.38);
@@ -83,7 +83,7 @@ export const ParticleTree = ({
       );
       boostColor(base, t);
 
-      // 白/冰闪点（顶端更多）
+      // �?冰闪点（顶端更多�?
       const r01 = Math.random();
       const topBoost = THREE.MathUtils.smoothstep(t, 0.55, 1.0);
 
@@ -99,12 +99,12 @@ export const ParticleTree = ({
     return { treePositions, explodePositions, colors, maxY };
   }, []);
 
-  // 顶部Y给星星
+  // 顶部Y给星�?
   useEffect(() => {
     if (topYRef) topYRef.current = data.maxY;
   }, [data.maxY, topYRef]);
 
-  // 当前插值位置（会被每帧修改）
+  // 当前插值位置（会被每帧修改�?
   const current = useRef<Float32Array>(new Float32Array(data.treePositions));
 
   const geom = useMemo(() => {
@@ -121,11 +121,11 @@ export const ParticleTree = ({
     pointsRef.current.rotation.y += delta * 0.08;
     pointsRef.current.rotation.y += (gestureRotation.current - pointsRef.current.rotation.y) * 0.06;
 
-    // ✅ 兼容你的按钮：ASSEMBLE/EXPLODE（也兼容 TREE）
+    // �?兼容你的按钮：ASSEMBLE/EXPLODE（也兼容 TREE�?
    const isTree = mode !== 'EXPLODE';
 
 
-    // 帧率无关插值
+    // 帧率无关插�?
     const a = 1 - Math.exp(-3 * delta);
 
     const cur = current.current;
@@ -150,9 +150,10 @@ export const ParticleTree = ({
         opacity={0.95}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
-        size={0.32}          // ✅ 这个值决定“树会不会肉眼可见”
+        size={0.32}          // �?这个值决定“树会不会肉眼可见�?
         sizeAttenuation
       />
     </points>
   );
 };
+

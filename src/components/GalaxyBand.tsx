@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
@@ -7,7 +7,7 @@ type Props = {
   yMax?: number;
   turns?: number;
   width?: number;      // 丝带宽度
-  lift?: number;       // 丝带离树表面的“浮起”距离
+  lift?: number;       // 丝带离树表面的“浮起”距�?
   colorCore?: string;  // 内芯颜色
   colorHalo?: string;  // 外晕颜色
 };
@@ -87,8 +87,8 @@ export function GalaxyBand({
       const t = i / N;
       const y = THREE.MathUtils.lerp(yMin, yMax, t);
 
-      // 树大致半径: (10-y)*0.4 + noise
-      // 丝带半径 = 树半径 + lift
+      // 树大致半�? (10-y)*0.4 + noise
+      // 丝带半径 = 树半�?+ lift
       const baseRadius = (10 - y) * 0.46 + lift;
 
       const ang = t * turns * Math.PI * 2;
@@ -101,7 +101,7 @@ export function GalaxyBand({
     const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.35);
     const frames = curve.computeFrenetFrames(N, false);
 
-    // --- 2) 丝带几何（用 strip 面片，而不是 Tube） ---
+    // --- 2) 丝带几何（用 strip 面片，而不�?Tube�?---
     const makeRibbon = (w: number) => {
       const positions = new Float32Array((N + 1) * 2 * 3);
       const uvs = new Float32Array((N + 1) * 2 * 2);
@@ -110,7 +110,7 @@ export function GalaxyBand({
       for (let i = 0; i <= N; i++) {
         const t = i / N;
         const p = curve.getPointAt(t);
-        // 用 binormal 当“横向”，做丝带宽度
+        // �?binormal 当“横向”，做丝带宽�?
         const b = frames.binormals[i];
 
         const left = p.clone().add(b.clone().multiplyScalar(-w * 0.5));
@@ -156,7 +156,7 @@ export function GalaxyBand({
     const ribbonTex = makeRibbonAlphaTexture();
     const fogTex = makeSpriteTexture();
 
-    // --- 3) 星云雾 Points：沿着丝带附近撒一堆半透明 sprite ---
+    // --- 3) 星云�?Points：沿着丝带附近撒一堆半透明 sprite ---
     const FOG_COUNT = 1200;
     const fogPos = new Float32Array(FOG_COUNT * 3);
 
@@ -164,7 +164,7 @@ export function GalaxyBand({
       const t = Math.random();
       const p = curve.getPointAt(t);
 
-      // 让雾在丝带周围漂一点（横向+纵向抖动）
+      // 让雾在丝带周围漂一点（横向+纵向抖动�?
       const ang = t * turns * Math.PI * 2;
       const radial = new THREE.Vector3(Math.cos(ang), 0, Math.sin(ang));
       const tangent = curve.getTangentAt(t).normalize();
@@ -198,14 +198,14 @@ export function GalaxyBand({
     groupRef.current.rotation.y += delta * 0.08;
     groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.06;
 
-    // 让纹理“流动”
+    // 让纹理“流动�?
     if (matCoreRef.current?.map) matCoreRef.current.map.offset.y -= delta * 0.08;
     if (matHaloRef.current?.map) matHaloRef.current.map.offset.y -= delta * 0.06;
   });
 
   return (
     <group ref={groupRef}>
-      {/* 外晕：更宽更淡 */}
+      {/* 外晕：更宽更�?*/}
       <mesh geometry={geoHalo} renderOrder={20}>
         <meshBasicMaterial
           ref={matHaloRef}
@@ -220,7 +220,7 @@ export function GalaxyBand({
         />
       </mesh>
 
-      {/* 内芯：更细更亮 */}
+      {/* 内芯：更细更�?*/}
       <mesh geometry={geoCore} renderOrder={21}>
         <meshBasicMaterial
           ref={matCoreRef}
@@ -235,7 +235,7 @@ export function GalaxyBand({
         />
       </mesh>
 
-      {/* 星云雾 */}
+      {/* 星云�?*/}
       <points geometry={fogGeo} renderOrder={19}>
         <pointsMaterial
           map={fogTex}
@@ -264,3 +264,4 @@ export function GalaxyBand({
     </group>
   );
 }
+

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStore } from '../store';
 
 export function Overlay() {
@@ -69,3 +68,4 @@ export function Overlay() {
     </div>
   );
 }
+
