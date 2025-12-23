@@ -1,10 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import ReactDOM from "react-dom/client";
+import { Suspense, StrictMode } from "react";
+import App from "./App";
+import "./index.css";
+import { ErrorBoundary } from "./ErrorBoundary";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <ErrorBoundary>
+      <Suspense fallback={<div style={{ color: "white", padding: 12 }}>Loading…</div>}>
+        <App />
+      </Suspense>
+    </ErrorBoundary>
+  </StrictMode>
 );

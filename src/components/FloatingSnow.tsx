@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import{ useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -183,11 +183,24 @@ export function FloatingSnow({
   });
 
   // ✅ 释放贴图，避免热更新堆资源
-  useEffect(() => {
-    return () => {
+  const disposeTimer = useRef<number | null>(null);
+
+useEffect(() => {
+  // 如果 StrictMode 触发“cleanup 后立刻又 setup”，这里会把刚刚排队的 dispose 取消掉
+  if (disposeTimer.current !== null) {
+    window.clearTimeout(disposeTimer.current);
+    disposeTimer.current = null;
+  }
+
+  return () => {
+    // 真正卸载时才会走到这里且不会再有下一次 setup 来取消
+    disposeTimer.current = window.setTimeout(() => {
       tex.dispose();
-    };
-  }, [tex]);
+      disposeTimer.current = null;
+    }, 0);
+  };
+}, [tex]);
+
 
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]} frustumCulled={false} renderOrder={1}>

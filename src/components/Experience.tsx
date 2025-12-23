@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, ContactShadows, OrbitControls, Sparkles } from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette, Noise } from '@react-three/postprocessing';
@@ -72,8 +72,8 @@ function Scene({
       <pointLight position={[0, -12, 0]} intensity={6} color="#ff00ff" distance={55} />
       <pointLight position={[0, 6, 16]} intensity={7} color="#ff7ad9" distance={120} />
 
-      <Environment preset="city" background={false} resolution={64} frames={1} />
-
+      
+<Environment preset="city" background={false} resolution={64} frames={1} />
       {/* 原本背景星尘 */}
       <Sparkles count={90} scale={[60, 35, 60]} size={1.0} speed={0.10} opacity={0.18} color="#fff" />
       <Sparkles count={60} scale={[60, 35, 60]} size={0.85} speed={0.07} opacity={0.10} color="#7df9ff" />
