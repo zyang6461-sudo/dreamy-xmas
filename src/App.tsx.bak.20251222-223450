@@ -1,0 +1,10 @@
+export default function App() {
+  return (
+    <div style={{ padding: 24 }}>
+      <h1 style={{ fontSize: 32, marginBottom: 8 }}>Dreamy Xmas 🎄</h1>
+      <p style={{ fontSize: 18, opacity: 0.8 }}>
+        保存后会自动刷新（HMR）
+      </p>
+    </div>
+  );
+}
